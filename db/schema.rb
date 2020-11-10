@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_012407) do
+ActiveRecord::Schema.define(version: 2020_11_10_034843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "listings", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "seller_profile_id", null: false
+    t.decimal "price", precision: 7, scale: 2
+    t.index ["seller_profile_id"], name: "index_listings_on_seller_profile_id"
+  end
+
+  create_table "seller_profiles", force: :cascade do |t|
+    t.string "brand_name"
+    t.text "brand_description"
+    t.string "brand_url"
+    t.string "contact_number"
+    t.string "contact_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_seller_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +46,13 @@ ActiveRecord::Schema.define(version: 2020_11_10_012407) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "listings", "seller_profiles"
+  add_foreign_key "seller_profiles", "users"
 end
