@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
   def index
     @listings = Listing.all
@@ -18,10 +19,25 @@ class ListingsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+  end
 
   private
 
-  def listing_params
-    params.require(:listing).permit(:title, :description, :quantity, :price)
-  end
+    def set_listing
+      @listing = Listing.find(params[:id])
+    end
+
+    def listing_params
+      params.require(:listing).permit(:title, :description, :quantity, :price, :image)
+    end
 end

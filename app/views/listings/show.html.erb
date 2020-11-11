@@ -1,0 +1,28 @@
+<h1 class="show-listing-heading">
+  <%= @listing.title %>
+</h1>
+
+<% if user_signed_in? %>
+  <% if current_user.seller_profile.listings.include?(@listing) %>
+    <div class="listing-crud-links">
+      <%= link_to "Edit listing", edit_listing_path(@listing) %>
+      <%= link_to "Delete listing", listing_path(@listing.id), method: :delete %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="listing-show-card">
+  <%= image_tag @listing.image, class: "listing-show-img" %>
+  <h3 class="listing-show-title">
+      <%= @listing.title %>
+  </h3>
+  <p class="listing-show-desc">
+    <%= @listing.description %>
+  </p>
+  <p class="listing-show-quantity">
+    <%= @listing.quantity %>
+  </p>
+  <p class="listing-show-price">
+    <%= @listing.price %>
+  </p>
+</div>

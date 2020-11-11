@@ -1,11 +1,33 @@
-hello world
-
 <%= link_to "Sign Up", new_user_registration_path %>
+<% unless user_signed_in? %>  
+  <%= link_to "Sign In", new_user_session_path %>
+<% end %>
 
 <% if user_signed_in? %>
   <%= link_to "Become a seller", new_seller_profile_path %>
+  <%= link_to "Sign out", destroy_user_session_path %>
+  <% if current_user.seller_profile %>
+    <%= link_to "Create new listing", new_listing_path %>
+  <% end %>
 <% end %>
 
-<% if current_user.seller_profile %>
-  <%= link_to "Create new listing", new_listing_path %>
+
+
+<% @listings.each do |listing| %>
+  <div class="listing-card">
+    <%= image_tag listing.image, class: "listing-img" %>
+    <h3 class="listing-title">
+      <%= listing.title %>
+    </h3>
+    <p class="listing-desc">
+      <%= listing.description %>
+    </p>
+    <p class="listing-quantity">
+      <%= listing.quantity %>
+    </p>
+    <p class="listing-price">
+      <%= listing.price %>
+    </p>
+    <%= link_to "View listing", listing_path(listing.id) %>
+  </div>
 <% end %>
