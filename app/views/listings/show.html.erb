@@ -6,7 +6,7 @@
   <% if current_user.seller_profile.listings.include?(@listing) %>
     <div class="listing-crud-links">
       <%= link_to "Edit listing", edit_listing_path(@listing) %>
-      <%= link_to "Delete listing", listing_path(@listing.id), method: :delete %>
+      <%= link_to "Delete listing", @listing, method: "delete" %>
     </div>
   <% end %>
 <% end %>

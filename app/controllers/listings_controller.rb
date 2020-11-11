@@ -29,6 +29,8 @@ class ListingsController < ApplicationController
   end
 
   def destroy
+    @listing.destroy
+    redirect_to listings_path
   end
 
   private
