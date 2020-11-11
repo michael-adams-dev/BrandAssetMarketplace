@@ -1,0 +1,27 @@
+<h1>New Seller Profile</h1>
+
+<%= form_with model: @seller_profile, local: true do |f| %>
+  <div>  
+    <%= f.label :brand_name %>
+    <%= f.text_field :brand_name %>
+  </div>
+  <div>  
+    <%= f.label :brand_description %>
+    <%= f.text_area :brand_description %>
+  </div>
+  <div>  
+    <%= f.label :brand_url %>
+    <%= f.text_field :brand_url %>
+  </div>
+  <div>  
+    <%= f.label :contact_number %>
+    <%= f.text_field :contact_number %>
+  </div>
+  <div>  
+    <%= f.label :contact_email %>
+    <%= f.email_field :contact_email %>
+  </div>
+  <div>  
+    <%= f.submit "Create seller profile" %>
+  </div>
+<% end %>
