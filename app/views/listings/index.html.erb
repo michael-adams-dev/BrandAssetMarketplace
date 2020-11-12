@@ -11,21 +11,25 @@
   <% end %>
 <% end %>
 
-<% @listings.each do |listing| %>
-  <div class="listing-card">
-    <%= image_tag listing.image, class: "listing-img" %>
-    <h3 class="listing-title">
-      <%= listing.title %>
-    </h3>
-    <p class="listing-desc">
-      <%= listing.description %>
-    </p>
-    <p class="listing-quantity">
-      <%= listing.quantity %>
-    </p>
-    <p class="listing-price">
-      <%= listing.price %>
-    </p>
-    <%= link_to "View listing", listing_path(listing.id) %>
-  </div>
-<% end %>
+<%= link_to "View Sellers", seller_profiles_path %>
+
+<div class="container">
+  <% @listings.each do |listing| %>
+    <div class="listing-card">
+      <%= image_tag listing.image, class: "listing-img" %>
+      <h3 class="listing-title">
+        <%= listing.title %>
+      </h3>
+      <p class="listing-desc">
+        <%= listing.description %>
+      </p>
+      <p class="listing-quantity">
+        <%= listing.quantity %>
+      </p>
+      <p class="listing-price">
+        <%= listing.price %>
+      </p>
+      <%= link_to "View listing", listing_path(listing.id) %>
+    </div>
+  <% end %>
+</div>

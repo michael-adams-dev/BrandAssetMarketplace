@@ -1,0 +1,53 @@
+<h1 class="show-profile-heading">Seller Profile Page</h1>
+
+<% if user_signed_in? && current_user.seller_profile.id == @seller_profile.id %>
+  <div class="profile-crud-links">
+      <%= link_to "Edit profile", edit_seller_profile_path(@seller_profile) %>
+      <%= link_to "Delete profile", @seller_profile, method: "delete" %>
+    </div>
+<% end %>
+
+<div class="container">
+  <div class="brand-info-card">
+    <%= link_to seller_profile_path(@seller_profile.id) do %>
+      <% if @seller_profile.brand_logo.attached? %>
+        <%= image_tag @seller_profile.brand_logo, class: "profile-show-img" %>
+      <% end %>
+    <% end %>
+    <div class="brand-info-copy">
+      <h2 class="profile-show-heading">
+        <%= @seller_profile.brand_name %>
+      </h2>
+      <p class="brand-description">
+        <%= @seller_profile.brand_description %>
+      </p>
+    </div>
+  </div>
+
+  <div class="seller-info-card">
+    <p><span id="brand-manager">Brand Manager:</span> <%= @seller_profile.user.first_name %> <%= @seller_profile.user.last_name %></p>
+    <p><span id="contact-email">Contact email:</span> <%= @seller_profile.contact_email %></p>
+    <p><span id="contact-number">Contact number:</span> <%= @seller_profile.contact_number %></p>
+  </div>
+
+  <div class="sellers-listings">
+    <% @seller_profile.listings.each do |listing| %>
+      <div class="listing-card">
+        <%= image_tag listing.image, class: "listing-img" %>
+        <h3 class="listing-title">
+          <%= listing.title %>
+        </h3>
+        <p class="listing-desc">
+          <%= listing.description %>
+        </p>
+        <p class="listing-quantity">
+          <%= listing.quantity %>
+        </p>
+        <p class="listing-price">
+          <%= listing.price %>
+        </p>
+        <%= link_to "View listing", listing_path(listing.id) %>
+      </div>
+    <% end %>
+  </div>
+</div>
