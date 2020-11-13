@@ -1,9 +1,13 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_listing, only: [:show, :edit, :update, :destroy :hide]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :hide]
   
   def index
-    @listings = Listing.all
+    if params[:search].present?
+      @listings = Listing.where('title ILIKE ?', "%#{params[:search][:title]}%")
+    else
+      @listings = Listing.all
+    end
   end
 
   def new
@@ -29,7 +33,12 @@ class ListingsController < ApplicationController
   end
 
   def hide
-
+    if @listing.hidden
+      @listing.update_attribute(:hidden, false)
+    else
+      @listing.update_attribute(:hidden, true)
+    end
+    redirect_to @listing
   end
 
   def destroy

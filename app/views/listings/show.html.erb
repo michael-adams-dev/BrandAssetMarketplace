@@ -2,27 +2,35 @@
   <%= @listing.title %>
 </h1>
 
+<%= link_to "All listings", listings_path %>
 <% if user_signed_in? %>
   <% if current_user.seller_profile.listings.include?(@listing) %>
     <div class="listing-crud-links">
       <%= link_to "Edit listing", edit_listing_path(@listing) %>
       <%= link_to "Delete listing", @listing, method: "delete" %>
+      <% if @listing.hidden %>
+        <%= link_to "Unhide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will become visible to buyers. Continue?' } %>
+      <% else %>
+        <%= link_to "Hide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will not be visible to buyers. Continue?' } %>
+      <% end %>
     </div>
   <% end %>
 <% end %>
 
-<div class="listing-show-card">
-  <%= image_tag @listing.image, class: "listing-show-img" %>
-  <h3 class="listing-show-title">
-      <%= @listing.title %>
-  </h3>
-  <p class="listing-show-desc">
-    <%= @listing.description %>
-  </p>
-  <p class="listing-show-quantity">
-    <%= @listing.quantity %>
-  </p>
-  <p class="listing-show-price">
-    <%= @listing.price %>
-  </p>
-</div>
+<% unless @listing.hidden %>
+  <div class="listing-show-card">
+    <%= image_tag @listing.image, class: "listing-show-img" %>
+    <h3 class="listing-show-title">
+        <%= @listing.title %>
+    </h3>
+    <p class="listing-show-desc">
+      <%= @listing.description %>
+    </p>
+    <p class="listing-show-quantity">
+      <%= @listing.quantity %>
+    </p>
+    <p class="listing-show-price">
+      <%= @listing.price %>
+    </p>
+  </div>
+<% end %>

@@ -5,5 +5,11 @@ Rails.application.routes.draw do
   end
 
   root to: "listings#index"
-  resources :listings, :seller_profiles
+  resources :listings do
+    member do
+      patch :hide
+      put :hide
+    end
+  end
+  resources :seller_profiles
 end

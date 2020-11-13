@@ -1,5 +1,6 @@
 <h1 class="show-profile-heading">Seller Profile Page</h1>
 
+<%= link_to "All listings", listings_path %>
 <% if user_signed_in? && current_user.seller_profile.id == @seller_profile.id %>
   <div class="profile-crud-links">
       <%= link_to "Edit profile", edit_seller_profile_path(@seller_profile) %>
@@ -32,22 +33,31 @@
 
   <div class="sellers-listings">
     <% @seller_profile.listings.each do |listing| %>
-      <div class="listing-card">
-        <%= image_tag listing.image, class: "listing-img" %>
-        <h3 class="listing-title">
-          <%= listing.title %>
-        </h3>
-        <p class="listing-desc">
-          <%= listing.description %>
-        </p>
-        <p class="listing-quantity">
-          <%= listing.quantity %>
-        </p>
-        <p class="listing-price">
-          <%= listing.price %>
-        </p>
-        <%= link_to "View listing", listing_path(listing.id) %>
-      </div>
+      <% if listing.hidden == false || (user_signed_in? && current_user.seller_profile.id == listing.seller_profile_id) %>
+        <div class="listing-card">
+          <%= image_tag listing.image, class: "listing-img" %>
+          <h3 class="listing-title">
+            <%= listing.title %>
+          </h3>
+          <p class="listing-desc">
+            <%= listing.description %>
+          </p>
+          <p class="listing-quantity">
+            <%= listing.quantity %>
+          </p>
+          <p class="listing-price">
+            <%= listing.price %>
+          </p>
+          <%= link_to "View listing", listing_path(listing.id) %>
+          <% if listing.hidden %>
+            <p>This listing is currently hidden from other users</p>
+            <%= link_to "Unhide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will become  visible to buyers. Continue?' } %>
+          <% else %>
+            <p>This listing is currently visible to other users</p>
+            <%= link_to "Hide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will not be  visible to buyers. Continue?' } %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

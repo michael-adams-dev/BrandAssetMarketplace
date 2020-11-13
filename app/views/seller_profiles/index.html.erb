@@ -3,7 +3,7 @@
     <div class="profile-card">
       <%= link_to seller_profile_path(profile.id) do %>
         <% if profile.brand_logo.attached? %>
-          <%= image_tag profile.image, class: "profile-img" %>
+          <%= image_tag profile.brand_logo, class: "profile-img" %>
         <% end %>
         <h3 class="profile-title">
           <%= profile.brand_name %>
