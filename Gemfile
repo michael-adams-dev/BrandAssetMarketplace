@@ -52,3 +52,5 @@ gem "cancancan", "~> 3.1"
 gem "rubocop", "~> 1.2"
 
 gem "rspec-rails", "~> 4.0"
+
+gem "stripe", "~> 5.28"

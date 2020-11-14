@@ -14,9 +14,17 @@
 <%= link_to "View Sellers", seller_profiles_path %>
 
 <%= form_with(scope: :search, url: listings_path, method: "get", local: true) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.submit 'Search' %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+    <%= f.label :category %>
+    <%= f.collection_select :category, Category.all, :id, :name, {}, { multiple: false } %>
+  <div>
+
+  <div>
+    <%= f.submit 'Search' %>
+  </div>
 <% end %>
 
 <div class="container">

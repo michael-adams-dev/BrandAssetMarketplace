@@ -4,7 +4,9 @@ class ListingsController < ApplicationController
   
   def index
     if params[:search].present?
-      @listings = Listing.where('title ILIKE ?', "%#{params[:search][:title]}%")
+      @listings = Listing.where(nil)
+      @listings = @listings.search_by_title(params[:search][:title]) if params[:search][:title].present?
+      @listings = @listings.search_by_category(params[:search][:category]) if params[:search][:category].present?
     else
       @listings = Listing.all
     end
@@ -53,6 +55,6 @@ class ListingsController < ApplicationController
     end
 
     def listing_params
-      params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden)
+      params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden, :category_id)
     end
 end
