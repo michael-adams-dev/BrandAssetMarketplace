@@ -20,6 +20,10 @@ class SellerProfilesController < ApplicationController
     end
   end
 
+  def show
+    @review = @seller_profile.reviews.new
+  end
+
   def edit
   end
 

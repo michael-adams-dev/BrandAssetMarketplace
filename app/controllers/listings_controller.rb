@@ -26,6 +26,28 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @review = @listing.reviews.new
+
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+        name: @listing.title,
+        description: @listing.description,
+        images: [@listing.image],
+        amount: (@listing.price * 100).to_i,
+        currency: 'aud',
+        quantity: @listing.quantity
+      }],
+      payment_intent_data: {
+        metadata: {
+          event_id: @listing.id
+        }
+      },
+      success_url: "#{root_url}payments/success?eventId=#{@listing.id}",
+      cancel_url: "#{root_url}"
+    )
+    @session_id = session.id
   end
 
   def edit
@@ -50,11 +72,11 @@ class ListingsController < ApplicationController
 
   private
 
-    def set_listing
-      @listing = Listing.find(params[:id])
-    end
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
 
-    def listing_params
-      params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden, :category_id)
-    end
+  def listing_params
+    params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden, :category_id)
+  end
 end
