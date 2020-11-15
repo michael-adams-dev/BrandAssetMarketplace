@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     end
   end
   resources :seller_profiles
+  get "/payments/success", to: "payments#success"
 end
