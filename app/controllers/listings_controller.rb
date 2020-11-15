@@ -26,6 +26,8 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @review = @listing.reviews.new
+
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email: current_user.email,
@@ -70,11 +72,11 @@ class ListingsController < ApplicationController
 
   private
 
-    def set_listing
-      @listing = Listing.find(params[:id])
-    end
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
 
-    def listing_params
-      params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden, :category_id)
-    end
+  def listing_params
+    params.require(:listing).permit(:title, :description, :quantity, :price, :image, :hidden, :category_id)
+  end
 end

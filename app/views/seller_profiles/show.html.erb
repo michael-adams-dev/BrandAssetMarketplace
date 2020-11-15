@@ -5,7 +5,7 @@
   <div class="profile-crud-links">
       <%= link_to "Edit profile", edit_seller_profile_path(@seller_profile) %>
       <%= link_to "Delete profile", @seller_profile, method: "delete" %>
-    </div>
+  </div>
 <% end %>
 
 <div class="container">
@@ -58,6 +58,22 @@
           <% end %>
         </div>
       <% end %>
+    <% end %>
+  </div>
+
+  <div class="comment-container">
+    <%= form_for [@seller_profile, @review] do |f| %>
+      <div class="comment-input">
+        <%= f.label :comment %>
+        <%= f.text_area :comment %>
+        <%= f.submit "Submit review" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="listing-reviews">
+    <%= @seller_profile.reviews.each do |review| %>
+      <p><%= review.comment %></p>
     <% end %>
   </div>
 </div>
