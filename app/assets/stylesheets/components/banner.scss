@@ -1,0 +1,83 @@
+.banner {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .banner-content {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  } .index-heading {
+      font-family: 'Montserrat', sans-serif;
+      color: antiquewhite;
+      text-align: center;
+      position: relative;
+    } h1 {
+        font-size: 4.5rem;
+        font-weight: 800;
+      }
+    .index-intro {
+      font-family: 'Arima Madurai', cursive;
+      color: antiquewhite;
+      text-align: center;
+      position: relative;
+      margin-top: 40px;
+    } p {
+        font-weight: 500;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        letter-spacing: 1.3px;
+      }
+      h2 {
+        margin-bottom: 30px;
+        font-weight: 500;
+        font-size: 2rem;
+        line-height: 1.5;
+        letter-spacing: 1.3px;
+      }
+    .register {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    } .register-btn {
+        position: relative;
+        background-color: antiquewhite;
+        .register-link {
+          color: #1d3557;
+          text-decoration: none;
+          font-family: 'Noto Sans JP', sans-serif;
+          font-weight: 500;
+          font-size: 1.2rem;
+        }
+      }
+}
+
+.new-seller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.question {
+  color: antiquewhite;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.banner::before {
+  content: "";
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}

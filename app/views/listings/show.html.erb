@@ -33,21 +33,14 @@
       <%= @listing.price %>
     </p>
 
-    <button data_stripe="payment"> Buy Item <%= number_to_currency(@listing.price) %></button>
+    <button data_stripe="payment"> Buy Item </button>
 
     <%= link_to 'Back', listings_path %>
 
     <script src="https://js.stripe.com/v3/"></script>
-
-    <script>
-      document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
-        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
-        stripe.redirectToCheckout({
-          sessionId: "<%= @session_id %>"
-        });
-      });
-    </script>
   </div>
+
+  <% javascript_pack_tag "stripe" %>
 
   <div class="comment-container">
     <%= form_for [@listing, @review] do |f| %>

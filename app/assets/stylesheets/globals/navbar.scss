@@ -1,0 +1,22 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  .nav-home {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+  } a {
+      color: #1d3557;
+      font-size: 1.5rem;
+    }
+  .nav-content {
+    a {
+      font-size: 1.2rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+    }
+  }
+} 
+
+#home-link {
+  font-size: 20px;
+}
