@@ -16,6 +16,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def self.find_user
+    user = User.find(@review.user_id)
+    return user
+  end
+
   private
 
   def parent

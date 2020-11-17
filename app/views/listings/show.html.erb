@@ -1,67 +1,77 @@
-<h1 class="show-listing-heading">
-  <%= @listing.title %>
-</h1>
+<%= render partial: "navbar"%>
 
-<%= link_to "All listings", listings_path %>
-<% if user_signed_in? %>
-  <% if current_user.seller_profile.listings.include?(@listing) %>
-    <div class="listing-crud-links">
-      <%= link_to "Edit listing", edit_listing_path(@listing) %>
-      <%= link_to "Delete listing", @listing, method: "delete" %>
-      <% if @listing.hidden %>
-        <%= link_to "Unhide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will become visible to buyers. Continue?' } %>
-      <% else %>
-        <%= link_to "Hide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will not be visible to buyers. Continue?' } %>
+<div class="container mt-5 listing-show-container">
+  <%= link_to "Back", listings_path, class: "back-link" %>
+  <% if user_signed_in? %>
+    <% if current_user.seller_profile %>
+      <% if current_user.seller_profile.listings.include?(@listing) %>
+        <div class="listing-crud-links">
+          <%= link_to "Edit listing", edit_listing_path(@listing), class: "back-link" %>
+          <%= link_to "Delete listing", @listing, method: "delete", class: "back-link ml-2" %>
+          <% if @listing.hidden %>
+            <%= link_to "Unhide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will become visible to buyers. Continue?' }, class: "back-link ml-2" %>
+          <% else %>
+            <%= link_to "Hide listing", hide_listing_path(@listing), method: :put, data: { confirm: 'This listing will not be visible to buyers. Continue?' }, class: "back-link ml-2" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% unless @listing.hidden %>
+    <div class="listing-show-card">
+      <%= image_tag @listing.image, class: "listing-show-img" %>
+      <div class="listing-show-info p-3">
+        <h3 class="product-info">Product Information</h3>
+        <div class="product-header mt-3 mb-4">
+          <h4 class="listing-show-title">
+              <%= @listing.title %>
+          </h4>
+          <button data_stripe="payment" class="buy-btn" id="stripe"> Buy Item </button>
+        </div>
+        <h5 class="mt-3">Description</h5>
+        <p class="listing-show-desc my-3">
+          <%= @listing.description %>
+        </p>
+        <p class="listing-show-quantity my-3">
+          <strong>Quantity: </strong> <%= @listing.quantity %>
+        </p>
+        <p class="listing-show-price my-3">
+          <strong>Price: </strong> <%= number_to_currency @listing.price %>
+        </p>
+        <hr>
+        <h3 class="product-info">Seller Information</h3>
+        <p class="listing-show-quantity my-3">
+          <strong>Brand: </strong> <%= link_to @listing.seller_profile.brand_name, seller_profile_path(@listing.seller_profile.id) %>
+        </p>
+        <p class="listing-show-quantity my-3">
+          <strong>Brand manager: </strong> <%= @listing.seller_profile.user.first_name %> <%= @listing.seller_profile.user.last_name %>
+        </p>
+      </div>
+      
+    </div>
+
+    <div class="comment-container my-5">
+      <h3 class="review-header">Product Reviews</h3>
+      <%= form_for [@listing, @review] do |f| %>
+        <div class="comment-input my-3">
+          <%= f.label :comment, class: "comment-form-label" %>
+          <%= f.text_area :comment, class: "comment-form-input mb-3" %>
+          <%= f.submit "Submit review", class: "comment-form-submit py-1" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="listing-reviews">
+      <% if @listing.reviews.first.comment %>
+        <div class="reviews-list">Past reviews</div>
+        <% @listing.reviews.each do |review| %>
+          <div class="review p-2">
+            <p class="review-comment"><%= review.comment %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
-<% end %>
+</div>
 
-<% unless @listing.hidden %>
-  <div class="listing-show-card">
-    <%= image_tag @listing.image, class: "listing-show-img" %>
-    <h3 class="listing-show-title">
-        <%= @listing.title %>
-    </h3>
-    <p class="listing-show-desc">
-      <%= @listing.description %>
-    </p>
-    <p class="listing-show-quantity">
-      <%= @listing.quantity %>
-    </p>
-    <p class="listing-show-price">
-      <%= @listing.price %>
-    </p>
-
-    <button data_stripe="payment"> Buy Item <%= number_to_currency(@listing.price) %></button>
-
-    <%= link_to 'Back', listings_path %>
-
-    <script src="https://js.stripe.com/v3/"></script>
-
-    <script>
-      document.querySelector("[data-stripe='payment']").addEventListener("click", () => {
-        const stripe = Stripe("<%= Rails.application.credentials.dig(:stripe, :public_key) %>");
-        stripe.redirectToCheckout({
-          sessionId: "<%= @session_id %>"
-        });
-      });
-    </script>
-  </div>
-
-  <div class="comment-container">
-    <%= form_for [@listing, @review] do |f| %>
-      <div class="comment-input">
-        <%= f.label :comment %>
-        <%= f.text_area :comment %>
-        <%= f.submit "Submit review" %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="listing-reviews">
-    <%= @listing.reviews.each do |review| %>
-      <p><%= review.comment %> </p>
-    <% end %>
-  </div>
-<% end %>
+<%= javascript_pack_tag "stripe" %>

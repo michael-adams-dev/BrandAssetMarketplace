@@ -1,7 +1,59 @@
-.listing-img {
-  width: 300px;
+.listings-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.listing-show-img {
+.listing-img {
+  object-fit: cover;
   width: 300px;
+  height: 300px;
+  margin: 10px;
+}
+
+.listings-container-heading {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #1d3557;
+}
+
+.listing-card {
+  border-radius: 5px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 5px 1px rgba(135,135,135,.5);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  color: #1d3557;
+  .listing-title h4{
+    margin-bottom: 0px;
+    font-weight: 700;
+  }
+  .listing-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .listing-price {
+      align-self: center;
+      font-size: 1.3rem;
+    }
+    .listing-btn {
+      background-color: #1d3557;
+      .listing-link {
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+      }
+    }
+    .listing-btn:hover {
+      background-color: white;
+      border: 1px solid #1d3557;
+    }
+    .listing-btn:hover .listing-link {
+      color: #1d3557;
+    } 
+    
+  } 
 }

@@ -1,51 +1,71 @@
-<%= link_to "Sign Up", new_user_registration_path %>
-<% unless user_signed_in? %>  
-  <%= link_to "Sign In", new_user_session_path %>
-<% end %>
+<%= render partial: "navbar"%>
 
-<% if user_signed_in? %>
-  <%= link_to "Become a seller", new_seller_profile_path %>
-  <%= link_to "Sign out", destroy_user_session_path %>
-  <% if current_user.seller_profile %>
-    <%= link_to "Create new listing", new_listing_path %>
-  <% end %>
-<% end %>
-
-<%= link_to "View Sellers", seller_profiles_path %>
-
-<%= form_with(scope: :search, url: listings_path, method: "get", local: true) do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+<div class="banner">
+  <div class="banner-content">
+    <div class="index-heading">
+      <h1>The Brand Asset Marketplace</h1>
+    </div>
+    <div class="index-intro">
+      <h2>Welcome to the Brand Asset Marketplace!</h2> 
+      <p>A place for brands to share and reuse marketing collateral from past events and activations. Have a browse of the listings below.</p>
+    </div>
+    <div class="register mt-4">
+      <button type="button" class="btn register-btn py-1 px-2">
+        <%= link_to "Sign Up", new_user_registration_path, class: "register-link" %>
+      </button>
+      <% if user_signed_in? %>
+        <div class="new-seller">
+          <div class="question my-3">Already have an account?</div>
+          <button type="button" class="btn register-btn py-1 px-2">
+            <%= link_to "Become a seller", new_seller_profile_path, class: "register-link" %>
+          </button>
+        </div>
+      <% end %>
+    </div>
   </div>
-    <%= f.label :category %>
-    <%= f.collection_select :category, Category.all, :id, :name, {}, { multiple: false } %>
-  <div>
+</div>
 
-  <div>
-    <%= f.submit 'Search' %>
-  </div>
-<% end %>
+<div class="container my-5">
+  <h2 class="listings-container-heading my-5">Available Items</h2>
 
-<div class="container">
-  <% @listings.each do |listing| %>
-    <% unless listing.hidden %>
-      <div class="listing-card">
-        <%= image_tag listing.image, class: "listing-img" %>
-        <h3 class="listing-title">
-          <%= listing.title %>
-        </h3>
-        <p class="listing-desc">
-          <%= listing.description %>
-        </p>
-        <p class="listing-quantity">
-          <%= listing.quantity %>
-        </p>
-        <p class="listing-price">
-          <%= listing.price %>
-        </p>
-        <%= link_to "View listing", listing_path(listing.id) %>
+  <div class="search-form">
+    <%= form_with(scope: :search, url: listings_path, method: "get", local: true) do |f| %>
+    <div class="search-content my-3">
+      <div class="search-box mr-5">
+        <h4 class="search-heading">Search products</h4>
+        <%= f.label :title, class:"search-label" %>
+        <%= f.text_field :title %>
       </div>
+      <div class="search-cat ml-5">
+        <h4 class="search-heading">Filter by product category</h4>
+        <%= f.label :category, class:"search-label" %>
+        <%= f.collection_select :category, Category.all, :id, :name, {}, { multiple: false } %>
+      </div>
+    </div>
+    <div class="search-submit my-1">
+      <%= f.submit 'Search' %>
+    </div>
     <% end %>
-  <% end %>
+  </div>
+
+  <div class="listings-container my-5">
+    <% @listings.each do |listing| %>
+      <% unless listing.hidden %>
+        <div class="listing-card mb-5">
+          <%= image_tag listing.image, class: "listing-img" %>
+          <h4 class="listing-title p-2 my-2">
+            <%= listing.title %>
+          </h4>
+          <div class="listing-copy p-2">
+            <div class="listing-price">
+              <%= number_to_currency(listing.price) %>
+            </div>
+            <button type="button" class="btn listing-btn">
+              <%= link_to "View listing", listing_path(listing.id), class: "listing-link" %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

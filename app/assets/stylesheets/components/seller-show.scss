@@ -1,0 +1,42 @@
+.brand-info-card {
+  display: flex;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  .profile-show-img {
+    max-width: 400px;
+  }
+  .brand-info-copy {
+    font-family: 'Noto Sans JP', sans-serif;
+  } .profile-show-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1d3557; 
+    } .brand-link {
+      color: #1d3557; 
+      text-decoration: none;
+    }
+    h5 {
+      font-weight: 700;
+    }
+    .brand-description {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+}
+
+.seller-info-card {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.sellers-listings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .seller-listing-copy {
+    font-weight: 500;
+  }
+}
