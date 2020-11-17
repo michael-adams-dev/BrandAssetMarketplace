@@ -19,7 +19,7 @@ class ListingsController < ApplicationController
   def create
     @listing = current_user.seller_profile.listings.new(listing_params)
     if @listing.save
-      redirect_to listings_path
+      redirect_to listing_path(@listing.id)
     else
       render :new
     end
@@ -27,33 +27,14 @@ class ListingsController < ApplicationController
 
   def show
     @review = @listing.reviews.new
-
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email: "example@email.com",
-      line_items: [{
-        name: @listing.title,
-        description: @listing.description,
-        images: [@listing.image],
-        amount: (@listing.price * 100).to_i,
-        currency: 'aud',
-        quantity: @listing.quantity
-      }],
-      payment_intent_data: {
-        metadata: {
-          event_id: @listing.id
-        }
-      },
-      success_url: "#{root_url}payments/success?eventId=#{@listing.id}",
-      cancel_url: "#{root_url}"
-    )
-    @session_id = session.id
   end
 
   def edit
   end
 
   def update
+    @listing.update(listing_params)
+    redirect_to listing_path
   end
 
   def hide
