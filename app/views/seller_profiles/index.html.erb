@@ -1,14 +1,18 @@
-<div class="container">
-  <% @seller_profiles.each do |profile| %>
-    <div class="profile-card">
-      <%= link_to seller_profile_path(profile.id) do %>
-        <% if profile.brand_logo.attached? %>
-          <%= image_tag profile.brand_logo, class: "profile-img" %>
+<%= render partial: "navbar"%>
+<div class="container mt-5">
+  <h2 class="listings-container-heading my-5">Our Sellers</h2>
+  <div class="profile-card-container">
+    <% @seller_profiles.each do |profile| %>
+      <div class="profile-card my-3">
+        <%= link_to seller_profile_path(profile.id) do %>
+          <% if profile.brand_logo.attached? %>
+            <%= image_tag profile.brand_logo, class: "index-profile-img" %>
+          <% end %>
+          <h3 class="profile-title my-3 pl-3">
+            <%= profile.brand_name %>
+          </h3>
         <% end %>
-        <h3 class="profile-title">
-          <%= profile.brand_name %>
-        </h3>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

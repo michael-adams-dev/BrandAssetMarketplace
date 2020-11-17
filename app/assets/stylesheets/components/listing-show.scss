@@ -1,6 +1,8 @@
 .listing-show-card {
   font-family: 'Noto Sans JP', sans-serif;
   display: flex;
+  border: 1px solid lightgray;
+  border-radius: 5px;
   .listing-show-img {
     max-width: 600px;
     border-radius: 5px;
@@ -8,6 +10,7 @@
   .listing-show-info {
     h5 {
       font-weight: 700;
+      width: auto;
     }
     .product-info {
       font-family: 'Noto Sans JP', sans-serif;

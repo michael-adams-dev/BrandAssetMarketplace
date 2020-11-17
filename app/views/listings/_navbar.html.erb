@@ -31,9 +31,11 @@
         <li class="nav-item mx-3">
           <%= link_to "View Sellers", seller_profiles_path, class: "nav-link" %>
         </li>
-        <li class="nav-item mx-3">
-          <%= link_to "About", seller_profiles_path, class: "nav-link" %>
-        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item mx-3">
+            <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>  

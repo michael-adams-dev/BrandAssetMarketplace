@@ -1,60 +1,64 @@
 <%= render partial: "navbar"%>
-<h1 class="show-profile-heading">Seller Profile Page</h1>
 
-<div class="container">
+<div class="container mt-5">
   <%= link_to "All listings", listings_path, class: "back-link" %>
-  <% if user_signed_in? %> 
-    <% if current_user.seller_profile %> 
-      <% if current_user.seller_profile.id == @seller_profile.id %>
-        <div class="profile-crud-links">
-            <%= link_to "Edit profile", edit_seller_profile_path(@seller_profile), class: "back-link" %>
-            <%= link_to "Delete profile", @seller_profile, method: "delete", class: "back-link" %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
 
-  <div class="brand-info-card">
+  <div class="brand-info-card mt-3">
     <%= link_to seller_profile_path(@seller_profile.id) do %>
       <% if @seller_profile.brand_logo.attached? %>
         <%= image_tag @seller_profile.brand_logo, class: "profile-show-img" %>
       <% end %>
     <% end %>
-    <div class="brand-info-copy">
+    <div class="brand-info-copy p-3">
       <h2 class="profile-show-heading">
-        <%= @seller_profile.brand_name %>
+        <%= link_to @seller_profile.brand_name, @seller_profile.brand_url, class: "brand-link" %>
       </h2>
-      <p class="brand-description">
+      <h5 class="mt-4">Brand description</h5>
+      <p class="brand-description my-2">
         <%= @seller_profile.brand_description %>
       </p>
     </div>
   </div>
 
-  <div class="seller-info-card">
-    <p><span id="brand-manager">Brand Manager:</span> <%= @seller_profile.user.first_name %> <%= @seller_profile.user.last_name %></p>
-    <p><span id="contact-email">Contact email:</span> <%= @seller_profile.contact_email %></p>
-    <p><span id="contact-number">Contact number:</span> <%= @seller_profile.contact_number %></p>
+  <div class="seller-info-card my-3 p-3">
+    <p><strong>Brand Manager:</strong> <%= @seller_profile.user.first_name %> <%= @seller_profile.user.last_name %></p>
+    <p><strong>Contact email:</strong> <%= @seller_profile.contact_email %></p>
+    <p><strong>Contact number:</strong> <%= @seller_profile.contact_number %></p>
+    <% if user_signed_in? %> 
+      <% if current_user.seller_profile %> 
+        <% if current_user.seller_profile.id == @seller_profile.id %>
+          <div class="profile-crud-links">
+              <%= link_to "Edit profile", edit_seller_profile_path(@seller_profile), class: "back-link mr-2" %>
+              <%= link_to "Delete profile", @seller_profile, method: "delete", class: "back-link" %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="sellers-listings">
     <% @seller_profile.listings.each do |listing| %>
       <% if listing.hidden == false || (user_signed_in? && current_user.seller_profile.id == listing.seller_profile_id) %>
-        <div class="listing-card">
+        <div class="listing-card mx-2 mb-5">
           <%= image_tag listing.image, class: "listing-img" %>
-          <h3 class="listing-title">
-            <%= listing.title %>
-          </h3>
-          <p class="listing-price">
-            <%= number_to_currency listing.price %>
-          </p>
-          <%= link_to "View listing", listing_path(listing.id) %>
-          <% if listing.hidden %>
-            <p>This listing is currently hidden from other users</p>
-            <%= link_to "Unhide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will become  visible to buyers. Continue?' } %>
-          <% else %>
-            <p>This listing is currently visible to other users</p>
-            <%= link_to "Hide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will not be  visible to buyers. Continue?' } %>
-          <% end %>
+          <div class="listing-card-copy p-2">
+            <h3 class="listing-title">
+              <%= listing.title %>
+            </h3>
+            <p class="listing-price">
+              <%= number_to_currency listing.price %>
+            </p>
+            <div class="seller-listing-copy">
+              <%= link_to "View listing", listing_path(listing.id) %>
+              <% if listing.hidden %>
+                <p>This listing is currently hidden from other users</p>
+                <%= link_to "Unhide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will become  visible to buyers. Continue?' } %>
+              <% else %>
+                <p>This listing is currently visible to other users</p>
+                <%= link_to "Hide listing", hide_listing_path(listing), method: :put, data: { confirm: 'This listing will not be  visible to buyers. Continue?' } %>
+              <% end %>
+            </div>
+          </div>
         </div>
       <% end %>
     <% end %>
