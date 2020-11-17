@@ -1,43 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
-  <div class="nav-home mx-3">
-    <%= link_to "HOME", listings_path, class: "navbar-brand", id: "home-link" %>
-  </div>
-  <div class="nav-content">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item mx-3">
-          <% unless user_signed_in? %>  
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-          <% else %>
-            <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link" %>
-          <% end %>
-        </li>
-        <% if user_signed_in? && current_user.seller_profile %>
-          <li class="nav-item dropdown mx-3">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Seller Links
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to "Create Listing", new_listing_path, class: "dropdown-item" %>
-              <%= link_to "Seller Profile Page", seller_profile_path(current_user.seller_profile.id), class: "dropdown-item" %>
-              <%= link_to "Edit Seller Profile", edit_seller_profile_path(current_user.seller_profile.id), class: "dropdown-item" %>
-              <%= link_to "Edit User Profile", edit_user_registration_path(current_user.id), class: "dropdown-item" %>
-            </div>
-          </li>
-        <% end %>
-        <li class="nav-item mx-3">
-          <%= link_to "View Sellers", seller_profiles_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item mx-3">
-          <%= link_to "About", seller_profiles_path, class: "nav-link" %>
-        </li>
-      </ul>
-    </div>
-  </div>  
-</nav>
+<%= render partial: "navbar"%>
 
 <div class="banner">
   <div class="banner-content">

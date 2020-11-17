@@ -1,0 +1,47 @@
+.comment-container {
+  .review-header {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    color: #1d3557;
+  } .comment-input {
+      display: flex;
+      flex-direction: column;
+      .comment-form-label {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #1d3557;
+      }
+      .comment-form-input {
+        width: 600px;
+      }
+      .comment-form-submit {
+        width: 150px;
+        background-color: #1d3557;
+        color: white;
+        font-weight: 700;
+        border-radius: 5px;
+      }
+      .comment-form-submit:hover {
+        background-color: white;
+        color: #1d3557;
+      }
+  }
+}
+
+.listing-reviews {
+  .reviews-list {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #1d3557;
+  } 
+  .review {
+    width: 600px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    .review-comment {
+      font-size: 1.2rem;
+    }
+  }
+}

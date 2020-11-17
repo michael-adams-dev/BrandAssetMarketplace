@@ -1,0 +1,44 @@
+.listing-show-card {
+  font-family: 'Noto Sans JP', sans-serif;
+  display: flex;
+  .listing-show-img {
+    max-width: 600px;
+    border-radius: 5px;
+  }
+  .listing-show-info {
+    h5 {
+      font-weight: 700;
+    }
+    .product-info {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      color: #1d3557;
+    }
+  } .product-header {
+      display: flex;
+      justify-content: space-between;
+      .buy-btn {
+        font-weight: 700;
+        border-radius: 7px;
+        color: white;
+        background-color: #0096c7;
+      }
+      .buy-btn:hover {
+        color: #0096c7;
+        background-color: white;
+      }
+    }
+    .listing-show-desc, .listing-show-quantity, .listing-show-price {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+}
+
+.back-link {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-decoration: none;
+  margin-top: 120px;
+  color: #1d3557;
+}
