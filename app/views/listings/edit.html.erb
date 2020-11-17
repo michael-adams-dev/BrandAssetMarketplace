@@ -1,29 +1,33 @@
-<h1>Edit Listing</h1>
+<%= render partial: "shared/navbar"%>
 
-<%= form_with model: @listing, local: true do |f| %>
-  <div>  
-    <%= f.label :title %>
-    <%= f.text_field :title, autofocus: true %>
-  </div>
-  <div>  
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div>  
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-  <div>  
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
-  </div>
-  <div>  
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
-  <div>
-    <label for="category_id">Select the most relevant category:</label>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
-  </div>
-  <%= f.submit "Edit listing" %>
-<% end %>
+<div class="container mt-5">
+  <h1>Edit Listing</h1>
+
+  <%= form_with model: @listing, local: true do |f| %>
+    <div>  
+      <%= f.label :title %>
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+    <div>  
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div>  
+      <%= f.label :price %>
+      <%= f.text_field :price %>
+    </div>
+    <div>  
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity %>
+    </div>
+    <div>  
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
+    <div>
+      <label for="category_id">Select the most relevant category:</label>
+      <%= f.collection_select :category_id, Category.all, :id, :name, prompt: true %>
+    </div>
+    <%= f.submit "Edit listing" %>
+  <% end %>
+</div>
