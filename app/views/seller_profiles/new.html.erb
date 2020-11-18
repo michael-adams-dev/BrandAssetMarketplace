@@ -1,34 +1,36 @@
 <%= render partial: "shared/navbar"%>
 <div class="container mt-5">
-  <h1>New Seller Profile</h1>
+  <div class="form-container">
+    <h1 class="form-title mb-3">New Seller Profile</h1>
 
-  <%= form_with model: @seller_profile, local: true do |f| %>
-    <div>  
-      <%= f.label :brand_name %>
-      <%= f.text_field :brand_name %>
-    </div>
-    <div>  
-      <%= f.label :brand_logo %>
-      <%= f.file_field :brand_logo %>
-    </div>
-    <div>  
-      <%= f.label :brand_description %>
-      <%= f.text_area :brand_description %>
-    </div>
-    <div>  
-      <%= f.label :brand_url %>
-      <%= f.text_field :brand_url %>
-    </div>
-    <div>  
-      <%= f.label :contact_number %>
-      <%= f.text_field :contact_number %>
-    </div>
-    <div>  
-      <%= f.label :contact_email %>
-      <%= f.email_field :contact_email %>
-    </div>
-    <div>  
-      <%= f.submit "Create seller profile" %>
-    </div>
-  <% end %>
+    <%= form_with model: @seller_profile, local: true do |f| %>
+      <div>  
+        <%= f.label :brand_name, class:"form-label" %>
+        <%= f.text_field :brand_name, class: "form-input" %>
+      </div>
+      <div>  
+        <%= f.label :brand_logo, class:"form-label" %>
+        <%= f.file_field :brand_logo, class: "form-input" %>
+      </div>
+      <div>  
+        <%= f.label :brand_description, class:"form-label" %>
+        <%= f.text_area :brand_description, class: "form-input form-box" %>
+      </div>
+      <div>  
+        <%= f.label :brand_url, class:"form-label" %>
+        <%= f.text_field :brand_url, class: "form-input" %>
+      </div>
+      <div>  
+        <%= f.label :contact_number, class:"form-label" %>
+        <%= f.text_field :contact_number, class: "form-input" %>
+      </div>
+      <div>  
+        <%= f.label :contact_email, class:"form-label" %>
+        <%= f.email_field :contact_email, class: "form-input" %>
+      </div>
+      <div>  
+        <%= f.submit "Create seller profile", class: "form-submit mt-2" %>
+      </div>
+    <% end %>
+  </div>
 </div>

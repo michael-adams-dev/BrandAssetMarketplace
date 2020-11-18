@@ -39,7 +39,7 @@
       <div class="search-cat ml-5">
         <h4 class="search-heading">Filter by product category</h4>
         <%= f.label :category, class:"search-label" %>
-        <%= f.collection_select :category, Category.all, :id, :name, {}, { multiple: false } %>
+        <%= f.collection_select :category, Category.all, :id, :name, {include_blank: 'Select a category'}, { multiple: false } %>
       </div>
     </div>
     <div class="search-submit my-1">

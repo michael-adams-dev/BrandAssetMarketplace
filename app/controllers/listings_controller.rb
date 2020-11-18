@@ -43,7 +43,7 @@ class ListingsController < ApplicationController
     else
       @listing.update_attribute(:hidden, true)
     end
-    redirect_to @listing
+    redirect_to seller_profile_path(current_user.seller_profile.id)
   end
 
   def destroy

@@ -1,0 +1,26 @@
+.form-container {
+  width: 450px;
+  margin: 0 auto;
+  padding: 15px 45px;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  box-sizing: border-box;
+  .form-input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .form-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    color: #1d3557;
+  }
+  .form-label, .form-submit {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+    color: #1d3557;
+    font-size: 1.2rem;
+  }
+  .form-box {
+    height: 120px;
+  }
+}
