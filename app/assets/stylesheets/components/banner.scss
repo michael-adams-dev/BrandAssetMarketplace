@@ -71,7 +71,7 @@
 
 .banner::before {
   content: "";
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), image-path("images/banner.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), image-url("banner.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
