@@ -34,7 +34,11 @@ class ListingsController < ApplicationController
 
   def update
     @listing.update(listing_params)
-    redirect_to listing_path
+    if @listing.save
+      redirect_to listing_path(@listing.id)
+    else
+      render :edit
+    end
   end
 
   def hide

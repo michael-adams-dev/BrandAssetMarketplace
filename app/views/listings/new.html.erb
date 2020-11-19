@@ -5,6 +5,16 @@
     <h1 class="form-title mb-3">New Listing</h1>
 
     <%= form_with model: @listing, local: true do |f| %>
+      <% if @listing.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+          <ul>
+            <% @listing.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div>  
         <%= f.label :title, class:"form-label" %>
         <%= f.text_field :title, autofocus: true, class: "form-input" %>
@@ -19,7 +29,7 @@
       </div>
       <div>  
         <%= f.label :quantity, class:"form-label" %>
-        <%= f.number_field :quantity, class: "form-input" %>
+        <%= f.number_field :quantity, class: "form-input", min: 1 %>
       </div>
       <div>  
         <%= f.label :image, class:"form-label" %>
