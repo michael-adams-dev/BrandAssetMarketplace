@@ -3,7 +3,7 @@ class SellerProfilesController < ApplicationController
   before_action :set_seller_profile, except: [:index, :new, :create]
 
   def index
-    @seller_profiles = SellerProfile.all
+    @seller_profiles = SellerProfile.all.includes([brand_logo_attachment: :blob])
   end
 
   def new

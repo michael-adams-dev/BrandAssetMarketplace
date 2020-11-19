@@ -5,10 +5,10 @@ class ListingsController < ApplicationController
   def index
     if params[:search].present?
       @listings = Listing.where(nil)
-      @listings = @listings.search_by_title(params[:search][:title]) if params[:search][:title].present?
-      @listings = @listings.search_by_category(params[:search][:category]) if params[:search][:category].present?
+      @listings = @listings.includes([image_attachment: :blob]).search_by_title(params[:search][:title]) if params[:search][:title].present?
+      @listings = @listings.includes([image_attachment: :blob]).search_by_category(params[:search][:category]) if params[:search][:category].present?
     else
-      @listings = Listing.all
+      @listings = Listing.all.includes([image_attachment: :blob])
     end
   end
 
