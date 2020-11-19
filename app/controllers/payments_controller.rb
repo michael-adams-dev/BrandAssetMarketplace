@@ -7,7 +7,6 @@ class PaymentsController < ApplicationController
     @listing = Listing.find(params[:id])
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
-      customer_email: current_user.email,
       line_items: [{
         name: @listing.title,
         description: @listing.description,

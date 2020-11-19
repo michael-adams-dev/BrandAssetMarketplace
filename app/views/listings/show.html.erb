@@ -19,7 +19,9 @@
   <% end %>
   <% unless @listing.hidden %>
     <div class="listing-show-card">
-      <%= image_tag @listing.image, class: "listing-show-img" %>
+      <% if @listing.image.attached? %>
+        <%= image_tag @listing.image, class: "listing-show-img" %>
+      <% end %>
       <div class="listing-show-info p-3">
         <h3 class="product-info">Product Information</h3>
         <div class="product-header mt-3 mb-4">

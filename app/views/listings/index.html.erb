@@ -52,7 +52,9 @@
     <% @listings.each do |listing| %>
       <% unless listing.hidden %>
         <div class="listing-card mb-5">
-          <%= image_tag listing.image, class: "listing-img" %>
+          <% if listing.image.attached? %>
+            <%= image_tag listing.image, class: "listing-img" %>
+          <% end %>
           <h4 class="listing-title p-2 my-2">
             <%= listing.title %>
           </h4>
