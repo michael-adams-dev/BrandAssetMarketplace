@@ -1,0 +1,7 @@
+<%= form_with model: @category, local: true do |f| %>
+  <div class="comment-input my-3">
+    <%= f.label :name, class: "comment-form-label" %>
+    <%= f.text_area :name, class: "comment-form-input mb-3" %>
+    <%= f.submit "Submit review", class: "comment-form-submit py-1" %>
+  </div>
+<% end %>

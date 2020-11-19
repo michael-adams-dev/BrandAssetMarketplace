@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   post "/payments", to: "payments#create"
   get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"
+  get "/categories", to: "categories#new"
+  post "/categories", to: "categories#create"
 end
