@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_234347) do
+ActiveRecord::Schema.define(version: 2020_11_18_235707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 2020_11_18_234347) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.integer "quantity"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "seller_profile_id", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_234347) do
   create_table "reviews", force: :cascade do |t|
     t.string "reviewable_type"
     t.bigint "reviewable_id"
-    t.text "comment"
+    t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 2020_11_18_234347) do
   end
 
   create_table "seller_profiles", force: :cascade do |t|
-    t.string "brand_name"
-    t.text "brand_description"
+    t.string "brand_name", null: false
+    t.text "brand_description", null: false
     t.string "brand_url"
     t.string "contact_number"
-    t.string "contact_email"
+    t.string "contact_email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
