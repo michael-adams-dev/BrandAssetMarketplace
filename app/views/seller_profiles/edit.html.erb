@@ -3,7 +3,17 @@
   <div class="form-container">
     <h1 class="form-title mb-3">Edit Seller Profile</h1>
 
-    <%= form_with model: @seller_profile, local: true do |f| %>
+    <%= form_with model: @seller_profile, local: true, method: "patch" do |f| %>
+      <% if @seller_profile.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@seller_profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+          <ul>
+            <% @seller_profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div>  
         <%= f.label :brand_name, class:"form-label" %>
         <%= f.text_field :brand_name, class: "form-input" %>

@@ -28,8 +28,9 @@ class SellerProfilesController < ApplicationController
   end
 
   def update
-    if @seller_profile.update(seller_profile_params)
-      redirect_to @seller_profile, notice: 'Profile was successfully updated.'
+    @seller_profile.update(seller_profile_params)
+    if @seller_profile.save
+      redirect_to seller_profile_path(@seller_profile.id), notice: 'Profile was successfully updated.'
     else
       render :edit
     end
