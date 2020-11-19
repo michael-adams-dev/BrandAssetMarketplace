@@ -67,6 +67,16 @@
   <div class="comment-container my-5">
     <h3 class="review-header">Seller Reviews</h3>
     <%= form_for [@seller_profile, @review] do |f| %>
+      <% if @review.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+          <ul>
+            <% @review.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="comment-input my-3">
         <%= f.label :comment, class: "comment-form-label" %>
         <%= f.text_area :comment, class: "comment-form-input mb-3" %>

@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @parent
     else 
-      render :new
+      redirect_to @parent
     end
   end
 
